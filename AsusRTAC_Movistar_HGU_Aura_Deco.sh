@@ -24,11 +24,11 @@ func_ConfAll()
 G_ALLIP="$*"
 for str_G_ALLIP in $(echo $G_ALLIP)
 do
-  V_IP_DEST="$(echo "$str_G_ALLIP" | awk -F'|' '{ print $1 }')"
-  V_IP_MASK="$(echo "$str_G_ALLIP" | awk -F'|' '{ print $2 }')"
-  V_IP_GWAY="$(echo "$str_G_ALLIP" | awk -F'|' '{ print $3 }')"
-  V_IP_VLAN="$(echo "$str_G_ALLIP" | awk -F'|' '{ print $4 }')"
-  V_IP_ITFE="$(echo "$str_G_ALLIP" | awk -F'|' '{ print $5 }')"
+  V_IP_DEST="$(echo "$str_G_ALLIP" | awk -F'|' '{ print $1 }')" ; if [ ! -n "$V_IP_DEST" ] ; then echo "[ERROR] - V_IP_DEST is NULL!!!" ; exit ; fi
+  V_IP_MASK="$(echo "$str_G_ALLIP" | awk -F'|' '{ print $2 }')" ; if [ ! -n "$V_IP_MASK" ] ; then echo "[ERROR] - V_IP_MASK is NULL!!!" ; exit ; fi
+  V_IP_GWAY="$(echo "$str_G_ALLIP" | awk -F'|' '{ print $3 }')" ; if [ ! -n "$V_IP_GWAY" ] ; then echo "[ERROR] - V_IP_GWAY is NULL!!!" ; exit ; fi
+  V_IP_VLAN="$(echo "$str_G_ALLIP" | awk -F'|' '{ print $4 }')" ; if [ ! -n "$V_IP_VLAN" ] ; then echo "[ERROR] - V_IP_VLAN is NULL!!!" ; exit ; fi
+  V_IP_ITFE="$(echo "$str_G_ALLIP" | awk -F'|' '{ print $5 }')" ; if [ ! -n "$V_IP_ITFE" ] ; then echo "[ERROR] - V_IP_ITFE is NULL!!!" ; exit ; fi
   if [ "$V_IP_VLAN" = "$V_VLAN_ITIP" ] ; then echo "[INFO] -    VLAN: $V_IP_VLAN (INTERNET)"
   elif [ "$V_IP_VLAN" = "$V_VLAN_VOIP" ] ; then echo "[INFO] -    VLAN: $V_IP_VLAN (VOZ_IP)"
   elif [ "$V_IP_VLAN" = "$V_VLAN_TVIP" ] ; then echo "[INFO] -    VLAN: $V_IP_VLAN (TV_IP)" ; fi
