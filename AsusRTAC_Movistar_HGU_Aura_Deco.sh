@@ -44,8 +44,8 @@ if [ "$#" -ne 2 ] ; then echo "[HELP] - $0 [add|del] [voz|tv|internet|all]" ; ex
 if [ "$1" = "add" ] ; then V_TYPE="$1" ; echo "[INFO] - Nateando ($V_TYPE) ..."
 elif [ "$1" = "del" ] ; then V_TYPE="$1" ; echo "[INFO] - Desnateando ($V_TYPE) ..."
 else V_TYPE="add" ; echo "[INFO] - Nateando ($V_TYPE) ..." ; fi
-echo "[EXEC] - $V_BIN_IPTABLES -t nat -I POSTROUTING -o $V_ITFACE_0"
-$V_BIN_IPTABLES -t nat -I POSTROUTING -o $V_ITFACE_0
+echo "[EXEC] - $V_BIN_IPTABLES -t nat -I POSTROUTING -o $V_ITFACE_0 -d $V_VLAN_GW/24 -j MASQUERADE"
+$V_BIN_IPTABLES -t nat -I POSTROUTING -o $V_ITFACE_0 -d $V_VLAN_GW/24 -j MASQUERADE
 if [ "$2" = "voz" ] ; then func_ConfAll "$G_VOIP"
 elif [ "$2" = "tv" ] ; then func_ConfAll "$G_TVIP"
 elif [ "$2" = "internet" ] ; then func_ConfAll "$G_ITIP"
